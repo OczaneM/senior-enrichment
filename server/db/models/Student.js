@@ -15,8 +15,23 @@ const Student = db.define('student', {
   email: {
     type: Sequelize.STRING,
     allowNull: false,
-    validation: {
-
+    validate: {
+      isEmail: true
+    }
+  },
+  gpa: {
+    type: Sequelize.INTEGER,
+    validate: {
+      max: 4,
+      min: 0
+    }
+  },
+  fullname: {
+    type: Sequelize.VIRTUAL,
+    get () {
+      return `${this.getDataValue('firstname')} ${this.getDataValue('lastname')}`
     }
   }
 })
+
+module.exports = Student
