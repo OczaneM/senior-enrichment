@@ -1,9 +1,11 @@
-'use strict'; 
+'use strict';
 
 const express = require('express');
 const path = require('path');
 const volleyball = require('volleyball');
 const bodyParser = require('body-parser');
+const db = require('./db')
+let PORT = 1337
 
 const app = express();
 
@@ -28,5 +30,9 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(err.status || 500).send(err.message || 'Internal server error');
 });
+
+app.listen(PORT, () => {
+  console.log(`Listning on port ${PORT}`)
+})
 
 module.exports = app;
