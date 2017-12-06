@@ -1,7 +1,6 @@
 'use strict'
 const Promise = require('bluebird')
-const Sequelize = require('sequelize')
-const db = require('../server/db')
+const db = require('./server/db')
 
 let data = {
   campus: [
