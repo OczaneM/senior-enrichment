@@ -1,5 +1,3 @@
-import { create } from 'domain';
-
 'use strict'
 const router = require('express').Router()
 const {Campus, Student} = require('../db/models')
