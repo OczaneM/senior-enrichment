@@ -1,6 +1,7 @@
 'use strict'
 const Promise = require('bluebird')
 const db = require('./server/db')
+const {Student, Campus} = require('./server/db/models')
 
 let data = {
   campus: [
@@ -27,31 +28,31 @@ let data = {
   ],
   student: [
     {
-      firstname: 'Oczane',
-      lastname: 'Rivera',
+      firstName: 'Oczane',
+      lastName: 'Rivera',
       email: 'oczane.rivera@mystic.com',
-      gpd: 3.50,
+      gpa: 3.50,
       campusId: 1
     },
     {
-      firstname: 'Jael',
-      lastname: 'Rivera',
+      firstName: 'Jael',
+      lastName: 'Rivera',
       email: 'jael.rivera@mystic.com',
-      gpd: 3.00,
+      gpa: 3.00,
       campusId: 3
     },
     {
-      firstname: 'Justin',
-      lastname: 'Mathieu',
+      firstName: 'Justin',
+      lastName: 'Mathieu',
       email: 'justin@wondermail.com',
-      gpd: 2.60,
+      gpa: 2.60,
       campusId: 4
     },
     {
-      firstname: 'Evelyn',
-      lastname: 'Michel',
+      firstName: 'Evelyn',
+      lastName: 'Michel',
       email: 'evelyn@wondermail.com',
-      gpd: 3.50,
+      gpa: 3.50,
       campusId: 2
     },
   ]
@@ -60,9 +61,9 @@ let data = {
 db.sync({force: true})
   .then( () => {
     console.log('Dropped old data, now insterting seed data')
-    return db.Campus.bulkCreate(data.campus)
+    return Campus.bulkCreate(data.campus)
   })
-  .then( () => db.Student.bulkCreate(data.student))
+  .then( () => Student.bulkCreate(data.student))
   .then( () => {
     console.log('Finished inserting data')
   })

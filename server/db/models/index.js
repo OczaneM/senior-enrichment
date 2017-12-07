@@ -1,8 +1,8 @@
 'use strict';
 
 //All Models
-const Student = require('./models/Student')
-const Campus = require('./model/Campus')
+const Student = require('./Student')
+const Campus = require('./Campus')
 
 //Associations
 Student.belongsTo(Campus)

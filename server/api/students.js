@@ -8,3 +8,12 @@ router.get('/', (req, res, next) => {
     .then( foundStudent => res.json(foundStudent))
     .catch(next)
 })
+
+router.post('/', (req, res, next) => {
+  Student.create(req.body)
+    .then( createdStudent => {
+      Student.findOne({
+        where: {id: createdStudent.id},
+        include: [Campus]})
+    })
+})
