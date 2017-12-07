@@ -1,0 +1,8 @@
+<Main>
+  <CampusesList>
+    <SingleCampus />
+  </CampusesList>
+  <StudentList>
+    <SingleStudent />
+  </StudentList>
+</Main>
