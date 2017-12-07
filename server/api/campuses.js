@@ -3,7 +3,15 @@ const router = require('express').Router()
 const {Campus, Student} = require('../db/models')
 module.exports = router
 
-//Get all students
+
+//get a specific campus
+router.get('/:id', (req, res, next) => {
+  Campus.findById(req.params.id)
+  .then( foundCampus => res.json(foundCampus))
+  .catch(next)
+})
+
+//Get all campuses
 router.get('/', (req, res, next) => {
   Campus.findAll()
     .then( foundCampus => res.json(foundCampus))

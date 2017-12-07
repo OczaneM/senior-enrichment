@@ -3,6 +3,14 @@ const router = require('express').Router()
 const {Campus, Student} = require('../db/models')
 module.exports = router
 
+
+//Get a specific tudent
+router.get('/:id', (req, res, next) => {
+  Student.findById(req.params.id, {include: [Campus] })
+  .then( foundStudent => res.json(foundStudent))
+  .catch(next)
+})
+
 //Get all students
 router.get('/', (req, res, next) => {
   Student.findAll({include: [Campus]})
@@ -14,9 +22,7 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
   Student.create(req.body)
     .then( createdStudent => {
-      Student.findOne({
-        where: {id: createdStudent.id},
-        include: [Campus]})
+      Student.findById( createdStudent.id, {include: [Campus]})
     })
     .then( createdStudent => res.json(createdStudent))
     .catch(next)
@@ -29,9 +35,7 @@ router.put('/:id', (req, res, next) => {
     returning: true
   })
   .then( updatedStudentArray => {
-    return Student.findOne({
-      where: {id: updatedStudentArray[1][0].id},
-      include: [Campus] })
+    return Student.findById(updatedStudentArray[1][0].id, {include: [Campus] })
       .then( updatedStudent => res.json(updatedStudent))
       .catch(next)
   })
