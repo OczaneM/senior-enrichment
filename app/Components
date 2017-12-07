@@ -1,0 +1,116 @@
+--VIEW HIERARCHY--
+<Main>
+  <NavBar />
+  <CampusList>
+    <DisplayImage />
+    <AddCampusForm />
+  </CampusList>
+  <StudentList>
+    <DisplayImage />
+    <AddStudentForm />
+  </StudentList>
+  <SingleCampus>
+    <DisplayImage />
+  </SingleCampus>
+  <EditCampusForm />
+  <SingleStudent>
+    <DisplayImage />
+  </SingleStudent>
+  <EditStudentForm />
+  <FeaturedCampus>
+    <DisplayImage />
+  </FeaturedCampus>
+</Main>
+
+Components
+
+--STORE--
+- stateful
+- Initializes the state with students and campuses
+- Has action types
+- Has action creators
+- Has thunk creators
+- Has a reducer
+
+
+--MAIN----> Home View
+*Functionality*
+- Should make an AJAX request to get all students and campuses
+- Renders the navbar
+- Renders the FeaturedCampus
+- Renders the CampusList
+- Renders the StudentList
+- Renders SingleCampus
+- Renders SingleStudent
+- Renders EditCampusForm
+- Renders EditStudentForm
+*Navigation*
+- Has a route to the list of students
+- Has a rout to the list of campuses
+- Has a route to home
+- Has a dynamic route to a single campus
+- Has a dynamic route to a single student
+- Has a route to editing a student
+- Has a route to editing a campus
+
+--NAVBAR----> Within all views
+- Links to StudentList route
+- Links to CampusList route
+- Links to Home route
+
+--FEATUREDCAMPUS----> Within Home view
+- Displays a list of links of up to 4 of the newest campuses
+- Renders DisplayImage for every link
+
+--CAMPUSLIST----> Campus View
+*Functionality*
+- Should update the state when a campus is deleted
+- Displays a list of links to all campuses
+- Renders DisplayImage for every link
+- Renders AddCampusForm
+
+
+--SINGLECAMPUS----> Single Campus View
+*Functionality*
+- Displays details about a campus
+- Displays a list of links of all students within that campus
+- Renders DisplayImage
+- Links to EditCampusForm
+
+--ADDCAMPUSFORM--
+- Adds a campus on submit
+- Should update the state with a newly created campus
+- Display value on change
+
+--EDITCAMPUSFORM---> Edit Campus View
+- Should update a Campus on submit
+- Should update the state with an updated campus
+- Redirects back to the specific campus after update
+
+--STUDENTLIST----> Student View
+*Functionality*
+- Displays a list of links to all students
+- Should make an AJAX call to delete a student
+- Should update the view and state when a student is deleted
+- Renders DisplayImage for every link
+- Renders AddStudentForm
+
+--SINGLESTUDENT----> Single Student View
+*Functionality*
+- Displays details about a student
+- Links to the Campus the student belongs to
+- Links to EditStudentForm route
+- Renders DisplayImage
+
+--ADDSTUDENTFORM---
+- Adds a student on submit
+- Should update the state with a newly created student
+- Displlay value on change
+
+--EDITSTUDENTFORM----> Edit Student View
+- Updates a student on submit
+- Should update the state with an updated student
+- Redirects back to the specific student after update
+
+--DISPLAYIMAGE--
+- Displays a given image
