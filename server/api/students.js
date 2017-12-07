@@ -22,7 +22,7 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
   Student.create(req.body)
     .then( createdStudent => {
-      Student.findById( createdStudent.id, {include: [Campus]})
+      return Student.findById( createdStudent.id, {include: [Campus]})
     })
     .then( createdStudent => res.json(createdStudent))
     .catch(next)

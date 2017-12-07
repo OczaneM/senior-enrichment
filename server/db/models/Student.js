@@ -29,7 +29,7 @@ const Student = db.define('student', {
   fullname: {
     type: Sequelize.VIRTUAL,
     get () {
-      return `${this.getDataValue('firstname')} ${this.getDataValue('lastname')}`
+      return `${this.getDataValue('firstName')} ${this.getDataValue('lastName')}`
     }
   }
 })
