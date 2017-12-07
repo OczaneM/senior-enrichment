@@ -4,8 +4,9 @@
   "description": "A review time project",
   "main": "index.js",
   "scripts": {
-    "start:dev": "webpack -w & nodemon main",
-    "start": "webpack -w & nodemon --watch main -e js,html main"
+    "start:dev": "webpack -w & nodemon server",
+    "start": "node server",
+    "seed": "node seed"
   },
   "keywords": [
     "react",
