@@ -13,6 +13,8 @@ const initialState = {
 //Action Types
 const GET_STUDENTS = 'GET_STUDENTS'
 const GET_CAMPUSES = 'GET_CAMPUSES'
+const ADD_CAMPUS = 'ADD_CAMPUS'
+const ADD_STUDENT = 'ADD_CAMPUS'
 
 //Action Creators
 export function getStudents (students) {
@@ -22,6 +24,16 @@ export function getStudents (students) {
 
 export function getCampuses (campuses) {
   const action = { type: GET_CAMPUSES, campuses}
+  return action
+}
+
+export function addCampus (campus) {
+  const action = { type: ADD_CAMPUS, campus}
+  return action
+}
+
+export function addStudent (student) {
+  const action = { type: ADD_STUDENT, student}
   return action
 }
 
@@ -48,6 +60,17 @@ export function fetchCampuses () {
   }
 }
 
+export function addNewCampus (campus) {
+  return function (dispatch) {
+    axios.post('/api/campuses', campus)
+      .then( res => res.data )
+      .then( newCampus => {
+        const action = addCampus(newCampus)
+        dispatch(action)
+      })
+  }
+}
+
 //Reducer
 function reducer (state = initialState, action) {
   switch (action.type) {
@@ -57,9 +80,19 @@ function reducer (state = initialState, action) {
         students: action.students
       }
     case GET_CAMPUSES:
+      return {
+        ...state,
+        campuses: action.campuses
+    }
+    case ADD_CAMPUS:
+      return {
+        ...state,
+        campuses: [...state.campuses, campus]
+      }
+    case ADD_STUDENT:
     return {
       ...state,
-      campuses: action.campuses
+      students: [...state.students, campus]
     }
     default:
       return state
