@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import store, { fetchStudents, fetchCampuses } from '../store'
 import { BrowserRouter as Router , Route, Switch} from 'react-router-dom'
 import Navbar from './Navbar'
+import CampusList from './CampusList'
  'react-router-dom'
 
 export default class Main extends Component {
@@ -28,6 +29,9 @@ export default class Main extends Component {
     return (
       <div>
         <Navbar />
+        <Switch>
+          <Route path="/campuses" component={CampusList} />
+        </Switch>
       </div>
     )
   }
