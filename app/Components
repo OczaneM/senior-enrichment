@@ -4,6 +4,7 @@
   <CampusList>
     <DisplayImage />
     <AddCampusForm />
+    <DeleteCampusForm />
   </CampusList>
   <StudentList>
     <DisplayImage />
@@ -64,10 +65,10 @@ Components
 
 --CAMPUSLIST----> Campus View
 *Functionality*
-- Should update the state when a campus is deleted
 - Displays a list of links to all campuses
 - Renders DisplayImage for every link
 - Renders AddCampusForm
+- Renders DeleteCampusForm
 
 
 --SINGLECAMPUS----> Single Campus View
@@ -86,6 +87,11 @@ Components
 - Should update a Campus on submit
 - Should update the state with an updated campus
 - Redirects back to the specific campus after update
+
+--DELETECAMPUSFORM--
+- Should display the list of campuses as options in a select
+- Should delete a campus on submit
+- Should update the state after campus is deleted
 
 --STUDENTLIST----> Student View
 *Functionality*
