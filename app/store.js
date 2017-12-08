@@ -40,12 +40,12 @@ export function addStudent (student) {
 //Thunk Creators
 export function fetchStudents () {
   return function (dispatch) {
-    axios.get('/api/students')
-      .then( res => res.data )
-      .then( students => {
-        const action = getStudents(students)
-        dispatch(action)
-      })
+    return axios.get('/api/students')
+    .then( res => res.data )
+    .then (students => {
+      const action = getStudents(students)
+      dispatch(action)
+    })
   }
 }
 
@@ -61,11 +61,25 @@ export function fetchCampuses () {
 }
 
 export function addNewCampus (campus) {
-  return function (dispatch) {
-    axios.post('/api/campuses', campus)
+  return function thunk (dispatch) {
+    console.log("FLAG: ", dispatch)
+    return axios.post('/api/campuses', campus)
       .then( res => res.data )
       .then( newCampus => {
+        console.log("NewCampus: ", newCampus)
         const action = addCampus(newCampus)
+        console.log(action)
+        dispatch(action)
+      })
+  }
+}
+
+export function addNewStudent (student) {
+  return function (dispatch) {
+    return axios.post('/api/students', student)
+      .then( res => res.data )
+      .then( newStudent => {
+        const action = addstudent(newStudent)
         dispatch(action)
       })
   }
@@ -87,7 +101,7 @@ function reducer (state = initialState, action) {
     case ADD_CAMPUS:
       return {
         ...state,
-        campuses: [...state.campuses, campus]
+        campuses: [...state.campuses, action.campus]
       }
     case ADD_STUDENT:
     return {

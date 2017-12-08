@@ -13,10 +13,8 @@ export default class Main extends Component {
   }
 
   componentDidMount () {
-    const getStudentsThunk = fetchStudents()
-    const getCampusesThunk = fetchCampuses()
-    store.dispatch(getStudentsThunk)
-    store.dispatch(getCampusesThunk)
+    store.dispatch(fetchStudents())
+    store.dispatch(fetchCampuses())
     this.unsubscribe = store.subscribe( () => this.setState(store.getState()))
   }
 
