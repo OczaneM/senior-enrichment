@@ -1,23 +1,55 @@
-// import axios from 'axios'
-// import {
-//   createStore,
-//   applyMiddleware} from 'redux'
-// import loggingMiddleware from 'redux-logger'
-// import thunkMiddleware from 'redux-thunk'
-// import { composeWithDevTools } from 'redux-devtools-extension'
+import axios from 'axios'
+import {
+  createStore,
+  applyMiddleware} from 'redux'
+import loggingMiddleware from 'redux-logger'
+import thunkMiddleware from 'redux-thunk'
+import { composeWithDevTools } from 'redux-devtools-extension'
 
-// //Initial State
-// const initialState = {
-//   students: [],
-//   campuses: []
-// }
+//Initial State
+const initialState = {
+  students: [],
+  campuses: []
+}
 
-// //Action Types
+//Action Types
+const GET_STUDENTS = 'GET_STUDENTS'
+const GET_CAMPUSES = 'GET_CAMPUSES'
 
-// //Action Creators
+//Action Creators
+export function getStudents (students) {
+  const action = { type: GET_STUDENTS, students}
+  return action
+}
 
-// //Thunk Creators
+export function getCampuses (campuses) {
+  const action = { type: GET_CAMPUSES, campuses}
+  return action
+}
 
-// //Reducer
+//Thunk Creators
+export function fetchStudents () {
+  return function (dispatch) {
+    axios.get('/api/students')
+      .then( res => res.data)
+      .then( students => {
+        const action = getStudents(students)
+        dispatch(action)
+      })
+  }
+}
 
-// export default createStore(reducer, composeWithDevTools(applyMiddleware(thunkMiddleware, loggingMiddleware)))
+//Reducer
+function reducer (state = initialState, action) {
+  switch (action.type) {
+    case GET_STUDENTS:
+      return {
+        ...state,
+        students: action.students
+      }
+    default:
+      return state
+  }
+}
+
+export default createStore(reducer, composeWithDevTools(applyMiddleware(thunkMiddleware, loggingMiddleware)))
