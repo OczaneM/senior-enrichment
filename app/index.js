@@ -1,15 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import {Browserouter} from 'react-router-dom'
-import Main from './components'
-import store from './reducers'
+import {Browserouter as Router} from 'react-router-dom'
+import Main from './components/Main'
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router>
-      <Main /> //default Home
-    </Router>
-  </Provider>,
+    //<Router>
+      <Main />,
+    //</Router>,
   document.getElementById('app')
 )
