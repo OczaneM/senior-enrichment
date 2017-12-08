@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import store, { fetchStudents, fetchCampuses } from '../store'
-import { BrowserRouter as Router , Route, Switch} from
+import { BrowserRouter as Router , Route, Switch} from 'react-router-dom'
+import Navbar from './Navbar'
  'react-router-dom'
 
 export default class Main extends Component {
 
   constructor(props) {
     super(props)
-    console.log(store)
     this.state = store.getState()
   }
 
@@ -25,9 +25,10 @@ export default class Main extends Component {
 
 
   render () {
-    console.log('Main rendering')
     return (
-      <p>Hello!</p>
+      <div>
+        <Navbar />
+      </div>
     )
   }
 
