@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import store, { fetchStudents, fetchCampuses } from '../store'
-import { BrowserRouter as Router } from
+import { BrowserRouter as Router , Route, Switch} from
  'react-router-dom'
 
 export default class Main extends Component {

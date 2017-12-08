@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Browserouter as Router} from 'react-router-dom'
+import {BrowserRouter as Router} from 'react-router-dom'
 import Main from './components/Main'
 
 ReactDOM.render(
-    //<Router>
-      <Main />,
-    //</Router>,
+    <Router>
+      <Main />
+    </Router>,
   document.getElementById('app')
 )
