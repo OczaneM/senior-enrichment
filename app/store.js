@@ -1,7 +1,5 @@
 import axios from 'axios'
-import {
-  createStore,
-  applyMiddleware} from 'redux'
+import {createStore, applyMiddleware} from 'redux'
 import loggingMiddleware from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
@@ -31,9 +29,20 @@ export function getCampuses (campuses) {
 export function fetchStudents () {
   return function (dispatch) {
     axios.get('/api/students')
-      .then( res => res.data)
+      .then( res => res.data )
       .then( students => {
         const action = getStudents(students)
+        dispatch(action)
+      })
+  }
+}
+
+export function fetchCampuses () {
+  return function (dispatch) {
+    axios.get('/api/campuses')
+      .then( res => res.data )
+      .then( campuses => {
+        const action = getCampuses(campuses)
         dispatch(action)
       })
   }
@@ -44,12 +53,19 @@ function reducer (state = initialState, action) {
   switch (action.type) {
     case GET_STUDENTS:
       return {
-        ...state,
+        ...state, //Object.assign
         students: action.students
       }
+    case GET_CAMPUSES:
+    return {
+      ...state,
+      campuses: action.campuses
+    }
     default:
       return state
   }
 }
 
-export default createStore(reducer, composeWithDevTools(applyMiddleware(thunkMiddleware, loggingMiddleware)))
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunkMiddleware, loggingMiddleware)))
+
+export default store

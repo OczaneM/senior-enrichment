@@ -1,12 +1,26 @@
 import React, { Component } from 'react'
-//import store from '../store'
-import { BrowserRouter as Router } from 'react-router-dom'
+import store, { fetchStudents, fetchCampuses } from '../store'
+import { BrowserRouter as Router } from
+ 'react-router-dom'
 
 export default class Main extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {}
+    console.log(store)
+    this.state = store.getState()
+  }
+
+  componentDidMount () {
+    const getStudentsThunk = fetchStudents()
+    const getCampusesThunk = fetchCampuses()
+    store.dispatch(getStudentsThunk)
+    store.dispatch(getCampusesThunk)
+    this.unsubscribe = store.subscribe( () => this.setState(store.getState()))
+  }
+
+  componentWillUnmount () {
+    this.unsubscribe()
   }
 
 
