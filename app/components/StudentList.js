@@ -23,6 +23,7 @@ export default class StudentList extends Component {
       <div>
         <center>
           <AddStudentForm />
+          <br />
           <label>Student List</label>
           {
             this.state.students.map( (student, index) => {

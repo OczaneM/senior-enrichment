@@ -25,12 +25,12 @@ export default class EditCampusForm extends Component {
   handleSubmit (event) {
     event.preventDefault()
     //creating request body for put request
-    const campusBody = {}
-    campusBody.id = this.props.match.params.id
-    if (this.state.campusNameEntry.length > 0) {campusBody.name = event.target.campusNameEntry.value}
-    if (this.state.campusImageEntry.length > 0) {campusBody.imageUrl = event.target.campusImageEntry.value}
-    if (this.state.campusDescEntry.length > 0) {campusBody.description = event.target.campusDescEntry.value}
-    store.dispatch(updateACampus(campusBody))
+    const campusInfo = {}
+    campusInfo.id = this.props.match.params.id
+    if (this.state.campusNameEntry.length > 0) {campusInfo.name = event.target.campusNameEntry.value}
+    if (this.state.campusImageEntry.length > 0) {campusInfo.imageUrl = event.target.campusImageEntry.value}
+    if (this.state.campusDescEntry.length > 0) {campusInfo.description = event.target.campusDescEntry.value}
+    store.dispatch(updateACampus(campusInfo))
 
     //resetting campus information entries
     store.dispatch(writeCampusInfo(['campusNameEntry', '']))

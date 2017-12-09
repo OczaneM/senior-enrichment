@@ -25,12 +25,12 @@ export default class AddCampusForm extends Component {
   handleSubmit (event) {
     event.preventDefault()
     //creating requet body for post request
-    const campusBody = {
+    const campusInfo = {
       name: event.target.campusNameEntry.value,
       imageUrl: event.target.campusImageEntry.value,
       description: event.target.campusDescEntry.value
     }
-    store.dispatch(addNewCampus(campusBody))
+    store.dispatch(addNewCampus(campusInfo))
 
     //resetting campus information entries
     store.dispatch(writeCampusInfo(['campusNameEntry', '']))

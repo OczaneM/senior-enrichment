@@ -10,17 +10,23 @@ const initialState = {
   campuses: [],
   campusNameEntry: '',
   campusImageEntry: '',
-  campusDescEntry: ''
+  campusDescEntry: '',
+  studentFirstName: '',
+  studentLastName: '',
+  studentEmail: '',
+  studentGPA: 0,
+
 }
 
 //Action Types
 const GET_STUDENTS = 'GET_STUDENTS'
 const GET_CAMPUSES = 'GET_CAMPUSES'
 const ADD_CAMPUS = 'ADD_CAMPUS'
-const ADD_STUDENT = 'ADD_CAMPUS'
+const ADD_STUDENT = 'ADD_STUDENT'
 const UPDATE_CAMPUS = 'UPDATE_CAMPUS'
 const UPDATE_STUDENT = 'UPDATE_STUDENT'
 const WRITE_CAMPUS_INFO = 'WRITE_CAMPUS_INFO'
+const WRITE_STUDENT_INFO = 'WRITE_STUDENT_INFO'
 
 //Action Creators
 export function getStudents (students) {
@@ -54,7 +60,12 @@ export function updateStudent (student) {
 }
 
 export function writeCampusInfo (campusInfo) {
-  const action = { type: WRITE_CAMPUS_INFO, name, campusInfo}
+  const action = { type: WRITE_CAMPUS_INFO, campusInfo}
+  return action
+}
+
+export function writeStudentInfo (studentInfo) {
+  const action = { type: WRITE_STUDENT_INFO, studentInfo}
   return action
 }
 
@@ -83,13 +94,10 @@ export function fetchCampuses () {
 
 export function addNewCampus (campus) {
   return function thunk (dispatch) {
-    console.log("FLAG: ", dispatch)
     return axios.post('/api/campuses', campus)
       .then( res => res.data )
       .then( newCampus => {
-        console.log("NewCampus: ", newCampus)
         const action = addCampus(newCampus)
-        console.log(action)
         dispatch(action)
       })
   }
@@ -100,7 +108,7 @@ export function addNewStudent (student) {
     return axios.post('/api/students', student)
       .then( res => res.data )
       .then( newStudent => {
-        const action = addstudent(newStudent)
+        const action = addStudent(newStudent)
         dispatch(action)
       })
   }
@@ -146,6 +154,11 @@ function reducer (state = initialState, action) {
         ...state,
         [action.campusInfo[0]]: action.campusInfo[1]
       }
+    case WRITE_STUDENT_INFO:
+      return {
+        ...state,
+        [action.studentInfo[0]]: action.studentInfo[1]
+      }
     case ADD_CAMPUS:
       return {
         ...state,
@@ -153,8 +166,8 @@ function reducer (state = initialState, action) {
       }
     case ADD_STUDENT:
       return {
-      ...state,
-      students: [...state.students, campus]
+        ...state,
+        students: [...state.students, action.student]
     }
     case UPDATE_CAMPUS:
       return {
@@ -168,7 +181,7 @@ function reducer (state = initialState, action) {
       return {
         ...state,
         students: state.students.map( students => {
-          if (student.id === action.student.id) return access.student
+          if (student.id === action.student.id) return action.student
           else return student
         })
       }
