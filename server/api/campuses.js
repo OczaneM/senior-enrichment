@@ -21,7 +21,6 @@ router.get('/', (req, res, next) => {
 //Create a Campus
 router.post('/', (req, res, next) => {
   Campus.create(req.body)
-    .then( createdCampus => Campus.findOne({where: {id: createdCampus.id}}))
     .then( createdCampus => res.json(createdCampus))
     .catch(next)
 })
