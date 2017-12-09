@@ -19,7 +19,7 @@ const GET_CAMPUSES = 'GET_CAMPUSES'
 const ADD_CAMPUS = 'ADD_CAMPUS'
 const ADD_STUDENT = 'ADD_CAMPUS'
 const UPDATE_CAMPUS = 'UPDATE_CAMPUS'
-const UPATE_STUDENT = 'UPDATE_STUDENT'
+const UPDATE_STUDENT = 'UPDATE_STUDENT'
 const WRITE_CAMPUS_INFO = 'WRITE_CAMPUS_INFO'
 
 //Action Creators
@@ -160,8 +160,16 @@ function reducer (state = initialState, action) {
       return {
         ...state,
         campuses: state.campuses.map( campus => {
-          if(campus.id === action.campus.id) return action.campus
+          if (campus.id === action.campus.id) return action.campus
           else return campus
+        })
+      }
+    case UPDATE_STUDENT:
+      return {
+        ...state,
+        students: state.students.map( students => {
+          if (student.id === action.student.id) return access.student
+          else return student
         })
       }
     default:

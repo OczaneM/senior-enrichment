@@ -5,6 +5,7 @@ import Navbar from './Navbar'
 import CampusList from './CampusList'
 import SingleCampus from './SingleCampus'
 import EditCampusForm from './EditCampusForm'
+import StudentList from './StudentList'
 
 export default class Main extends Component {
 
@@ -32,6 +33,7 @@ export default class Main extends Component {
           <Route exact path="/campuses" component={CampusList} />
           <Route exact path="/campuses/:id" render={(props) => (<SingleCampus {...props} campusArray={this.state.campuses} />)} />
           <Route path="/campuses/:id/editCampus" render={(props) => (<EditCampusForm {...props} campusArray={this.state.campuses} />)} />
+          <Route exact path="/students" component={StudentList} />
         </Switch>
       </div>
     )
