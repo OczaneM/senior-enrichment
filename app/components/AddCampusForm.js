@@ -50,7 +50,7 @@ export default class AddCampusForm extends Component {
             <label>Campus name </label>
             <input name="campusName" type="text" placeholder="New Campus Name" value={this.state.campusName} onChange={this.handleChange} /><br />
             <label>Campus Image </label>
-            <input name="campusImage" type="text" placeholder="imgUrl" onChange={this.handleChange} /><br />
+            <input name="campusImage" type="url" placeholder="imgUrl" onChange={this.handleChange} /><br />
             <textarea name="campusDesc" rows="4" cols="35" placeholder="Brief campus decription" value={this.campusDesc} onChange={this.handleChange} /><br />
             <button type="submit" className="btn submit">Submit</button>
           </form>

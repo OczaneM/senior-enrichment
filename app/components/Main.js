@@ -3,7 +3,7 @@ import store, { fetchStudents, fetchCampuses } from '../store'
 import { BrowserRouter as Router , Route, Switch} from 'react-router-dom'
 import Navbar from './Navbar'
 import CampusList from './CampusList'
- 'react-router-dom'
+import SingleCampus from './SingleCampus'
 
 export default class Main extends Component {
 
@@ -28,7 +28,8 @@ export default class Main extends Component {
       <div>
         <Navbar />
         <Switch>
-          <Route path="/campuses" component={CampusList} />
+          <Route exact path="/campuses" component={CampusList} />
+          <Route path="/campuses/:id" render={(props) => (<SingleCampus {...props} campusArray={this.state.campuses} />)} />
         </Switch>
       </div>
     )

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import DisplayImage from './DisplayImage'
 import AddCampusForm from './AddCampusForm'
 
+
 export default class CampusList extends Component {
   constructor (props) {
     super(props)
