@@ -66,6 +66,7 @@ Components
 --CAMPUSLIST----> Campus View
 *Functionality*
 - Displays a list of links to all campuses
+- Links to EditCampusForm route
 - Renders DisplayImage for every link
 - Renders AddCampusForm
 - Renders DeleteCampusForm

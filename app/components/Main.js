@@ -4,6 +4,7 @@ import { BrowserRouter as Router , Route, Switch} from 'react-router-dom'
 import Navbar from './Navbar'
 import CampusList from './CampusList'
 import SingleCampus from './SingleCampus'
+import EditCampusForm from './EditCampusForm'
 
 export default class Main extends Component {
 
@@ -29,7 +30,8 @@ export default class Main extends Component {
         <Navbar />
         <Switch>
           <Route exact path="/campuses" component={CampusList} />
-          <Route path="/campuses/:id" render={(props) => (<SingleCampus {...props} campusArray={this.state.campuses} />)} />
+          <Route exact path="/campuses/:id" render={(props) => (<SingleCampus {...props} campusArray={this.state.campuses} />)} />
+          <Route path="/campuses/:id/editCampus" render={(props) => (<EditCampusForm {...props} campusArray={this.state.campuses} />)} />
         </Switch>
       </div>
     )

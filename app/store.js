@@ -7,7 +7,10 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 //Initial State
 const initialState = {
   students: [],
-  campuses: []
+  campuses: [],
+  campusNameEntry: '',
+  campusImageEntry: '',
+  campusDescEntry: ''
 }
 
 //Action Types
@@ -15,6 +18,9 @@ const GET_STUDENTS = 'GET_STUDENTS'
 const GET_CAMPUSES = 'GET_CAMPUSES'
 const ADD_CAMPUS = 'ADD_CAMPUS'
 const ADD_STUDENT = 'ADD_CAMPUS'
+const UPDATE_CAMPUS = 'UPDATE_CAMPUS'
+const UPATE_STUDENT = 'UPDATE_STUDENT'
+const WRITE_CAMPUS_INFO = 'WRITE_CAMPUS_INFO'
 
 //Action Creators
 export function getStudents (students) {
@@ -34,6 +40,21 @@ export function addCampus (campus) {
 
 export function addStudent (student) {
   const action = { type: ADD_STUDENT, student}
+  return action
+}
+
+export function updateCampus (campus) {
+  const action = { type: UPDATE_CAMPUS, campus}
+  return action
+}
+
+export function updateStudent (student) {
+  const action = { type: UPDATE_STUDENT, student}
+  return action
+}
+
+export function writeCampusInfo (campusInfo) {
+  const action = { type: WRITE_CAMPUS_INFO, name, campusInfo}
   return action
 }
 
@@ -85,6 +106,28 @@ export function addNewStudent (student) {
   }
 }
 
+export function updateACampus (campus) {
+  return function (dispatch) {
+    axios.put(`/api/campuses/${campus.id}`, campus)
+    .then( res => res.data )
+    .then( updatedCampus => {
+      const action = updateCampus(updatedCampus)
+      dispatch(action)
+    })
+  }
+}
+
+export function updatedAstudent (student) {
+  return function (dispatch) {
+    axios.updated('/api/student', student)
+    .then( res => res.data )
+    .then (updatedStudent => {
+      const action = updateStudent(updatedStudent)
+      dispatch(action)
+    })
+  }
+}
+
 //Reducer
 function reducer (state = initialState, action) {
   switch (action.type) {
@@ -98,16 +141,29 @@ function reducer (state = initialState, action) {
         ...state,
         campuses: action.campuses
     }
+    case WRITE_CAMPUS_INFO:
+      return {
+        ...state,
+        [action.campusInfo[0]]: action.campusInfo[1]
+      }
     case ADD_CAMPUS:
       return {
         ...state,
         campuses: [...state.campuses, action.campus]
       }
     case ADD_STUDENT:
-    return {
+      return {
       ...state,
       students: [...state.students, campus]
     }
+    case UPDATE_CAMPUS:
+      return {
+        ...state,
+        campuses: state.campuses.map( campus => {
+          if(campus.id === action.campus.id) return action.campus
+          else return campus
+        })
+      }
     default:
       return state
   }
