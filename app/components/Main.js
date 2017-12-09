@@ -32,7 +32,7 @@ export default class Main extends Component {
         <Navbar />
         <Switch>
           <Route exact path="/campuses" component={CampusList} />
-          <Route exact path="/campuses/:id" render={(props) => (<SingleCampus {...props} campusArray={this.state.campuses} />)} />
+          <Route exact path="/campuses/:id" render={(props) => (<SingleCampus {...props} campusArray={this.state.campuses} studentArray={this.state.students} />)} />
           <Route path="/campuses/:id/editCampus" render={(props) => (<EditCampusForm {...props} />)} />
           <Route exact path="/students" component={StudentList} />
           <Route exact path="/students/:id" render={(props) => (<SingleStudent {...props} studentArray={this.state.students} />)} />

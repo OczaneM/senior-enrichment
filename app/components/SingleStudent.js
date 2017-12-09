@@ -12,7 +12,9 @@ export default function SingleStudent (props) {
           <p>Name: {studentToView.fullname}</p>
           <p>e-mail: {studentToView.email}</p>
           <p>GPA: {studentToView.gpa}</p>
-          <p>Campus: {studentToView.campus.name}</p>
+          <p>
+          <Link to={`/campuses/${studentToView.campus.id}`} >Campus: {studentToView.campus.name}
+          </Link></p>
         </div>
       }
     </div>
