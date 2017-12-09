@@ -1,47 +1,44 @@
 import React, { Component } from 'react'
-import store, { addNewCampus } from '../store'
+import store, { addNewCampus, writeCampusInfo } from '../store'
 
 export default class AddCampusForm extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      campusName: '',
-      campusImage: '',
-      campusDesc: ''
-    }
+    this.state = store.getState()
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  // componentDidMount () {
-  //   this.unsubscribe = store.subscribe( () => this.setState(store.getState()))
-  // }
-  // componentWillUnmount () {
-  //   this.unsubscribe()
-  // }
+  componentDidMount () {
+    this.unsubscribe = store.subscribe( () => this.setState(store.getState()))
+  }
+
+  componentWillUnmount () {
+    this.unsubscribe()
+  }
 
   handleChange (event) {
-    this.setState({ [event.target.name]: event.target.name.value})
+    store.dispatch(writeCampusInfo([event.target.name, event.target.value]))
   }
 
 
   handleSubmit (event) {
     event.preventDefault()
+    //creating requet body for post request
     const campusBody = {
-      name: event.target.campusName.value,
-      imageUrl: event.target.campusImage.value,
-      description: event.target.campusDesc.value
+      name: event.target.campusNameEntry.value,
+      imageUrl: event.target.campusImageEntry.value,
+      description: event.target.campusDescEntry.value
     }
     store.dispatch(addNewCampus(campusBody))
-    this.setState({
-      campusName: '',
-      campusImage: '',
-      campusDesc: ''
-    })
+
+    //resetting campus information entries
+    store.dispatch(writeCampusInfo(['campusNameEntry', '']))
+    store.dispatch(writeCampusInfo(['campusImageEntry', '']))
+    store.dispatch(writeCampusInfo(['campusDescEntry', '']))
   }
 
   render () {
-    console.log(store)
     return (
       <div>
         <center>
@@ -49,12 +46,12 @@ export default class AddCampusForm extends Component {
           <form id="new-campus-form" onSubmit={this.handleSubmit} >
             <label>Campus name </label>
 
-            <input name="campusName" type="text" placeholder="New Campus Name" value={this.state.campusName} onChange={this.handleChange} /><br />
+            <input name="campusNameEntry" type="text" placeholder="New Campus Name" value={this.state.campusNameEntry} onChange={this.handleChange} /><br />
 
             <label>Campus Image </label>
-            <input name="campusImage" type="url" placeholder="imgUrl" value={this.state.campusImage} onChange={this.handleChange} /><br />
+            <input name="campusImageEntry" type="url" placeholder="imgUrl" value={this.state.campusImageEntry} onChange={this.handleChange} /><br />
 
-            <textarea name="campusDesc" rows="4" cols="35" placeholder="Brief campus decription" value={this.state.campusDesc} onChange={this.handleChange} /><br />
+            <textarea name="campusDescEntry" rows="4" cols="35" placeholder="Brief campus decription" value={this.state.campusDescEntry} onChange={this.handleChange} /><br />
             <button type="submit" className="btn submit">Submit</button>
           </form>
         </center>

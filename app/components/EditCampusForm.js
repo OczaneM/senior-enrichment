@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import store, { writeCampusInfo, updateACampus } from '../store'
+import { Redirect } from 'react-router-dom'
 
 export default class EditCampusForm extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ export default class EditCampusForm extends Component {
 
   handleSubmit (event) {
     event.preventDefault()
-    //creating request body for update request
+    //creating request body for put request
     const campusBody = {}
     campusBody.id = this.props.match.params.id
     if (this.state.campusNameEntry.length > 0) {campusBody.name = event.target.campusNameEntry.value}
@@ -38,8 +39,6 @@ export default class EditCampusForm extends Component {
   }
 
   render () {
-    console.log("campusName:", this.state.campusNameEntry)
-    console.log("campusDesc:", this.state.campusDescEntry)
     let campusToEdit = this.state.campuses.find((campus) => campus.id == this.props.match.params.id)
     return (
       <div>
