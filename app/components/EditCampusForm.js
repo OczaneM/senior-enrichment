@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import store, { writeCampusInfo, updateACampus } from '../store'
-import { Redirect } from 'react-router-dom'
+//import { Redirect } from 'react-router-dom'
 
 export default class EditCampusForm extends Component {
   constructor(props) {

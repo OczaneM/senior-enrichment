@@ -6,6 +6,7 @@ import CampusList from './CampusList'
 import SingleCampus from './SingleCampus'
 import EditCampusForm from './EditCampusForm'
 import StudentList from './StudentList'
+import SingleStudent from './SingleStudent'
 
 export default class Main extends Component {
 
@@ -32,8 +33,9 @@ export default class Main extends Component {
         <Switch>
           <Route exact path="/campuses" component={CampusList} />
           <Route exact path="/campuses/:id" render={(props) => (<SingleCampus {...props} campusArray={this.state.campuses} />)} />
-          <Route path="/campuses/:id/editCampus" render={(props) => (<EditCampusForm {...props} campusArray={this.state.campuses} />)} />
+          <Route path="/campuses/:id/editCampus" render={(props) => (<EditCampusForm {...props} />)} />
           <Route exact path="/students" component={StudentList} />
+          <Route exact path="/students/:id" render={(props) => (<SingleStudent {...props} studentArray={this.state.students} />)} />
         </Switch>
       </div>
     )

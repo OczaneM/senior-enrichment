@@ -29,7 +29,7 @@ export default class StudentList extends Component {
             this.state.students.map( (student, index) => {
               return (
                 <Link to={`/students/${student.id}`} key={student.id} >
-                <p>{index+1}. {student.fullname}</p>
+                <p>{index + 1}. {student.fullname}</p>
                 </Link>
               )
             })
