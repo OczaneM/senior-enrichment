@@ -28,6 +28,7 @@ const UPDATE_STUDENT = 'UPDATE_STUDENT'
 const WRITE_CAMPUS_INFO = 'WRITE_CAMPUS_INFO'
 const WRITE_STUDENT_INFO = 'WRITE_STUDENT_INFO'
 const DELETE_STUDENT = 'DELETE_STUDENT'
+const DELETE_CAMPUS = 'DELETE_CAMPUS'
 
 //Action Creators
 export function getStudents (students) {
@@ -72,6 +73,11 @@ export function writeStudentInfo (studentInfo) {
 
 export function deleteStudent (student) {
   const action = { type: DELETE_STUDENT, student}
+  return action
+}
+
+export function deleteCampus (campus) {
+  const action = { type: DELETE_CAMPUS, campus}
   return action
 }
 
@@ -152,6 +158,16 @@ export function deleteAStudent (student) {
   }
 }
 
+export function deleteACampus (campus) {
+  return function (dispatch) {
+    axios.delete(`/api/campuses/${campus.id}`)
+    .then ( () => {
+      const action = deleteCampus(campus)
+      dispatch(action)
+    })
+  }
+}
+
 //Reducer
 function reducer (state = initialState, action) {
   switch (action.type) {
@@ -205,6 +221,11 @@ function reducer (state = initialState, action) {
       return {
         ...state,
         students: state.students.filter( student => student.id != action.student.id)
+      }
+    case DELETE_CAMPUS:
+      return {
+        ...state,
+        campuses: state.campuses.filter( campus => campus.id != action.campus.id)
       }
     default:
       return state

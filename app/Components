@@ -99,7 +99,7 @@ Components
 - Displays a list of links to all students
 - Should make an AJAX call to delete a student
 - Should update the view and state when a student is deleted
-- Renders DisplayImage for every link
+- Renders DisplayImage for every link (pending)
 - Renders AddStudentForm
 
 --SINGLESTUDENT----> Single Student View
