@@ -125,9 +125,10 @@ export function updateACampus (campus) {
   }
 }
 
-export function updatedAstudent (student) {
+export function updateAStudent (student) {
   return function (dispatch) {
-    axios.updated('/api/student', student)
+    console.log("Student Info: ", student)
+    axios.put(`/api/students/${student.id}`, student)
     .then( res => res.data )
     .then (updatedStudent => {
       const action = updateStudent(updatedStudent)
@@ -180,7 +181,7 @@ function reducer (state = initialState, action) {
     case UPDATE_STUDENT:
       return {
         ...state,
-        students: state.students.map( students => {
+        students: state.students.map( student => {
           if (student.id === action.student.id) return action.student
           else return student
         })
