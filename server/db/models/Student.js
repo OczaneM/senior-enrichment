@@ -20,7 +20,7 @@ const Student = db.define('student', {
     }
   },
   gpa: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.DECIMAL(10, 2),
     validate: {
       max: 4,
       min: 0
