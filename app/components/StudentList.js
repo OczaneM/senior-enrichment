@@ -32,7 +32,7 @@ export default class StudentList extends Component {
       <div>
         <center>
           <AddStudentForm />
-          <br />
+          <br /></center>
           <label>Student List</label>
           {
             this.state.students.map( (student, index) => {
@@ -46,7 +46,6 @@ export default class StudentList extends Component {
               )
             })
           }
-        </center>
       </div>
     )
   }

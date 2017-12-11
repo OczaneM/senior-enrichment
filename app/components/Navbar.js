@@ -5,7 +5,7 @@ export default function Navbar () {
 
   return (
     <div>
-      <label>Naviation</label>
+      <h2>Navigation</h2>
       <Link to="/">
         <p>Home</p>
       </Link>

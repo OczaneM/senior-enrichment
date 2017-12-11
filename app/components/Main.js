@@ -30,6 +30,7 @@ export default class Main extends Component {
   render () {
     return (
       <div>
+        <h1>Margaret Hamilton Interplanetary Academy</h1>
         <Navbar />
         <Switch>
           <Route exact path="/campuses" component={CampusList} />
