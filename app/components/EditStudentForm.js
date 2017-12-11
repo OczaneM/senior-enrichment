@@ -65,7 +65,7 @@ export default class EditStudentForm extends Component {
             <br />
             <input name="studentEmail" type="text" placeholder={studentToEdit.email} value={this.state.studentEmail} onChange={this.handleChange} />
             <br />
-            <input name="studentGPA" type="number" placeholder={studentToEdit.gpa} value={this.state.studentGPA} onChange={this.handleChange} min="0" max="4" />
+            <input name="studentGPA" type="text" placeholder={studentToEdit.gpa} value={this.state.studentGPA} onChange={this.handleChange} />
             <br />
             <select name="campus">
               {this.state.campuses.map( campus => {
