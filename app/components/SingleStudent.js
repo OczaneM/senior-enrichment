@@ -13,8 +13,10 @@ export default function SingleStudent (props) {
           <p>e-mail: {studentToView.email}</p>
           <p>GPA: {studentToView.gpa}</p>
           <p>
-            <Link to={`/campuses/${studentToView.campus.id}`} >Campus: {studentToView.campus.name}
-            </Link>
+            { studentToView.campusId &&
+              <Link to={`/campuses/${studentToView.campusId}`} >Campus: {studentToView.campus.name}
+              </Link>
+          }
           </p>
           <p>
             <Link to={`/students/${studentToView.id}/editStudent`}>

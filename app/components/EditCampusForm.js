@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import store, { writeCampusInfo, updateACampus } from '../store'
+import store, { writeCampusInfo, updateACampus, updateAStudent } from '../store'
 //import { Redirect } from 'react-router-dom'
 
 export default class EditCampusForm extends Component {
@@ -8,6 +8,7 @@ export default class EditCampusForm extends Component {
     this.state = store.getState()
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleRemoveButton = this.handleRemoveButton.bind(this)
   }
 
   componentDidMount () {
@@ -38,8 +39,17 @@ export default class EditCampusForm extends Component {
     store.dispatch(writeCampusInfo(['campusDescEntry', '']))
   }
 
+  handleRemoveButton (event) {
+    let student = {
+      id: event.target.value,
+      campusId: null
+    }
+    store.dispatch(updateAStudent(student))
+  }
+
   render () {
     let campusToEdit = this.state.campuses.find((campus) => campus.id == this.props.match.params.id)
+    let campusStudents = this.state.students.filter( student => student.campusId == this.props.match.params.id)
     return (
       <div>
         { campusToEdit &&
@@ -52,6 +62,21 @@ export default class EditCampusForm extends Component {
               <br />
 
               <textarea name="campusDescEntry" rows="4" cols="50" placeholder={campusToEdit.description} value={this.state.campusDescEntry} onChange={this.handleChange} />
+              <br /><br />
+              <label>Campus Students: </label>
+              <br />
+              {
+                campusStudents.length >= 1 &&
+                campusStudents.map( (campusStudent, index) => {
+                  return (
+                    <div>
+                      {index + 1}. {campusStudent.fullname}
+                      <button type="button" name="student" value={campusStudent.id} onClick={this.handleRemoveButton} >Remove</button>
+                    </div>
+                  )
+                })
+              }
+              <br />
               <button type="submit" className="btn submit">Submit</button>
             </form>
           </div>
