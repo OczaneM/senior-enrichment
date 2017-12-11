@@ -9,6 +9,7 @@ export default class EditCampusForm extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleRemoveButton = this.handleRemoveButton.bind(this)
+    this.handleAddButton = this.handleAddButton.bind(this)
   }
 
   componentDidMount () {
@@ -47,6 +48,25 @@ export default class EditCampusForm extends Component {
     store.dispatch(updateAStudent(student))
   }
 
+  handleAddButton (event) {
+    //Verifying that student belongs to our roster
+    let isAStudent = this.state.students.find( student => student.fullname == event.target.value)
+    //Verifying that student does not already belong to this campus
+    let alreadyCampusStudent = this.state.students.find( student => student.campusId == this.props.match.params.id)
+    if (!isAStudent) alert("Student does not belong to our roster")
+    else if (alreadyCampusStudent) {
+      alert("Student is already in this campus")
+    }
+    else {
+      let student = {
+        id: isAStudent.id,
+        campusId: this.props.match.params.id
+      }
+      store.dispatch(updateAStudent(student))
+      store.dispatch(writeCampusInfo(['campusStudentEntry', '']))
+    }
+  }
+
   render () {
     let campusToEdit = this.state.campuses.find((campus) => campus.id == this.props.match.params.id)
     let campusStudents = this.state.students.filter( student => student.campusId == this.props.match.params.id)
@@ -71,12 +91,16 @@ export default class EditCampusForm extends Component {
                   return (
                     <div>
                       {index + 1}. {campusStudent.fullname}
-                      <button type="button" name="student" value={campusStudent.id} onClick={this.handleRemoveButton} >Remove</button>
+                      <button type="button" value={campusStudent.id} onClick={this.handleRemoveButton} >Remove</button>
                     </div>
                   )
                 })
               }
               <br />
+              <label>Add a student: </label>
+                <input name="campusStudentEntry" type="text" placeholder="Student Full Name" value={this.state.campusStudentEntry} onChange={this.handleChange} />
+                <button type="button" value={this.state.campusStudentEntry} onClick={this.handleAddButton}>Add</button>
+                <br /><br />
               <button type="submit" className="btn submit">Submit</button>
             </form>
           </div>

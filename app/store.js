@@ -11,6 +11,7 @@ const initialState = {
   campusNameEntry: '',
   campusImageEntry: '',
   campusDescEntry: '',
+  campusStudentEntry: '',
   studentFirstName: '',
   studentLastName: '',
   studentEmail: '',

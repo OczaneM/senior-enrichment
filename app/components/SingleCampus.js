@@ -19,7 +19,7 @@ export default function SingleCampus (props) {
           { campusStudents.map( (student, index) => {
             return (
               <Link to={`/students/${student.id}`} key={student.id} >
-              <p>{index + 1}. {student.firstName}</p>
+              <p>{index + 1}. {student.fullname}</p>
               </Link>
               )
             })
